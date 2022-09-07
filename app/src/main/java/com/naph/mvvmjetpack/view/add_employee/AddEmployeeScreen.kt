@@ -8,8 +8,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 
 @Composable
-fun AddEmployeeScreen(
-    navController: NavController
-) {
+fun AddEmployeeScreen() {
 
 }

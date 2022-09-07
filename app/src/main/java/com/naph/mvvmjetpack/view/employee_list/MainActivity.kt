@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.naph.mvvmjetpack.model.Employee
+import com.naph.mvvmjetpack.view.bottom_nav.MainScreen
 import retrofit2.Call
 
 @AndroidEntryPoint
@@ -28,23 +29,23 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     color = MaterialTheme.colors.background
                 ) {
-                    EmployeeScreen()
+                    MainScreen()
                 }
             }
         }
     }
 }
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MVVMJetpackTheme {
-        val employee = Data(
-            25,
-            "Naphtali Makori",
-            130000,
-            1,
-            "https://howtodoandroid.com/images/coco.jpg"
-        )
-        EmployeeItem(employee = employee)
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun DefaultPreview() {
+//    MVVMJetpackTheme {
+//        val employee = Data(
+//            25,
+//            "Naphtali Makori",
+//            130000,
+//            1,
+//            "https://howtodoandroid.com/images/coco.jpg"
+//        )
+//        EmployeeItem(employee = employee)
+//    }
+//}
