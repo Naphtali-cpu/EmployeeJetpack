@@ -1,11 +1,10 @@
-package com.naph.mvvmjetpack.view.add_employee
+package com.naph.mvvmjetpack.view.update_employee
 
 import android.content.Context
-import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -25,23 +24,24 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.naph.mvvmjetpack.model.AddEmployee
 
 @Composable
-fun AddEmployeeScreen(
+fun UpdateEmployeeScreen(
     id: String,
-    viewModel: AddEmployeeViewModel = viewModel()
+    updateViewModel: UpdateEmployeeViewModel = viewModel()
 ) {
+    val context = LocalContext.current
 
-    val ctx = LocalContext.current
+    val userNameUpdate = remember {
+        mutableStateOf(TextFieldValue())
+    }
 
-    val userName = remember {
+    val salaryUpdate = remember {
         mutableStateOf(TextFieldValue())
     }
-    val salary = remember {
+
+    val ageUpdate = remember {
         mutableStateOf(TextFieldValue())
     }
-    val age = remember {
-        mutableStateOf(TextFieldValue())
-    }
-    // on below line we are creating a column.
+
     Column(
         // on below line we are adding a modifier to it
         // and setting max size, max height and max width
@@ -59,7 +59,7 @@ fun AddEmployeeScreen(
         Text(
             // on below line we are specifying text as
             // Session Management in Android.
-            text = "Add Employee",
+            text = "Update Employee",
             // on below line we are specifying text color.
 //            color = greenColor,
             fontSize = 20.sp,
@@ -72,13 +72,13 @@ fun AddEmployeeScreen(
         //on below line we are adding spacer
         Spacer(modifier = Modifier.height(5.dp))
         // on below line we are creating a text field for our employee name.
-        TextField(
+        OutlinedTextField(
             // on below line we are specifying value for our email text field.
-            value = userName.value,
+            value = userNameUpdate.value,
             // on below line we are adding on value change for text field.
-            onValueChange = { userName.value = it },
+            onValueChange = { userNameUpdate.value = it },
             // on below line we are adding place holder as text as "Enter your email"
-            placeholder = { Text(text = "Enter your name") },
+            placeholder = { Text(text = "Update Employee Name") },
             // on below line we are adding modifier to it
             // and adding padding to it and filling max width
             modifier = Modifier
@@ -93,13 +93,13 @@ fun AddEmployeeScreen(
         // on below line we are adding spacer
         Spacer(modifier = Modifier.height(5.dp))
         // on below line we are creating a text field for our salary.
-        TextField(
+        OutlinedTextField(
             // on below line we are specifying value for our email text field.
-            value = salary.value,
+            value = salaryUpdate.value,
             // on below line we are adding on value change for text field.
-            onValueChange = { salary.value = it },
+            onValueChange = { salaryUpdate.value = it },
             // on below line we are adding place holder as text as "Enter your email"
-            placeholder = { Text(text = "Enter Salary") },
+            placeholder = { Text(text = "Update Salary") },
             // on below line we are adding modifier to it
             // and adding padding to it and filling max width
             modifier = Modifier
@@ -114,13 +114,13 @@ fun AddEmployeeScreen(
 
         Spacer(modifier = Modifier.height(5.dp))
         // on below line we are creating a text field for our employee age.
-        TextField(
+        OutlinedTextField(
             // on below line we are specifying value for our email text field.
-            value = age.value,
+            value = ageUpdate.value,
             // on below line we are adding on value change for text field.
-            onValueChange = { age.value = it },
+            onValueChange = { ageUpdate.value = it },
             // on below line we are adding place holder as text as "Enter your email"
-            placeholder = { Text(text = "Enter Age") },
+            placeholder = { Text(text = "Update Age") },
             // on below line we are adding modifier to it
             // and adding padding to it and filling max width
             modifier = Modifier
@@ -138,8 +138,8 @@ fun AddEmployeeScreen(
         Button(
             onClick = {
                 // on below line we are calling make payment method to update data.
-                postDataUsingRetrofit(
-                    ctx, userName, salary, age, viewModel, id
+                updateEmployee(
+                    context, userNameUpdate, salaryUpdate, ageUpdate, updateViewModel, id
                 )
             },
             // on below line we are adding modifier to our button.
@@ -148,22 +148,22 @@ fun AddEmployeeScreen(
                 .padding(16.dp)
         ) {
             // on below line we are adding text for our button
-            Text(text = "Post Data", modifier = Modifier.padding(8.dp))
+            Text(text = "Update Employee", modifier = Modifier.padding(8.dp))
         }
         // on below line we are adding a spacer.
         Spacer(modifier = Modifier.height(20.dp))
     }
 }
 
-fun postDataUsingRetrofit(
-    ctx: Context,
-    userName: MutableState<TextFieldValue>,
-    salary: MutableState<TextFieldValue>,
-    age: MutableState<TextFieldValue>,
-    viewModel: AddEmployeeViewModel,
+
+fun updateEmployee(
+    context: Context,
+    userNameUpdate: MutableState<TextFieldValue>,
+    salaryUpdate: MutableState<TextFieldValue>,
+    ageUpdate: MutableState<TextFieldValue>,
+    updateViewModel: UpdateEmployeeViewModel,
     id: String
 ) {
-    Toast.makeText(ctx, userName.toString(), Toast.LENGTH_LONG).show()
-    val dataModel = AddEmployee(userName.value.text, salary.value.text, age.value.text, id)
-    viewModel.createEmployee(dataModel)
+    val updateData = AddEmployee(userNameUpdate.value.text, salaryUpdate.value.text, ageUpdate.value.text, id)
+    updateViewModel.updateEmployee(id, updateData)
 }

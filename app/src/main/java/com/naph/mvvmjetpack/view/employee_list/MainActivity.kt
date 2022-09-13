@@ -3,9 +3,6 @@ package com.naph.mvvmjetpack.view.employee_list
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
@@ -35,17 +32,17 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-//@Preview(showBackground = true)
-//@Composable
-//fun DefaultPreview() {
-//    MVVMJetpackTheme {
-//        val employee = Data(
-//            25,
-//            "Naphtali Makori",
-//            130000,
-//            1,
-//            "https://howtodoandroid.com/images/coco.jpg"
-//        )
-//        EmployeeItem(employee = employee)
-//    }
-//}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    MVVMJetpackTheme {
+        val employee = Data(
+            25,
+            "Naphtali Makori",
+            130000,
+            "1",
+            "https://howtodoandroid.com/images/coco.jpg"
+        )
+    }
+}

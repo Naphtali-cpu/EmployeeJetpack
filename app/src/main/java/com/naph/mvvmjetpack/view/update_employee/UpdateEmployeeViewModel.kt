@@ -1,4 +1,4 @@
-package com.naph.mvvmjetpack.view.add_employee
+package com.naph.mvvmjetpack.view.update_employee
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,22 +9,21 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AddEmployeeViewModel: ViewModel() {
-    var createEmployeeLiveData: MutableLiveData<AddEmployee?> = MutableLiveData()
+class UpdateEmployeeViewModel: ViewModel() {
+    var updateEmployeeLiveData: MutableLiveData<AddEmployee?> = MutableLiveData()
 
-    fun createEmployee(addEmployee: AddEmployee) {
+    fun updateEmployee(id: String, updateEmployee: AddEmployee) {
         val retroService = RetroInstance.getRetrofitInstance().create(ApiService::class.java)
-        val call = retroService.addEmployee(addEmployee)
+        val call = retroService.updateNewEmployee(id, updateEmployee)
         call.enqueue(object : Callback<AddEmployee> {
             override fun onResponse(call: Call<AddEmployee>, response: Response<AddEmployee>) {
-                createEmployeeLiveData.postValue(response.body())
+                updateEmployeeLiveData.postValue(response.body())
             }
 
             override fun onFailure(call: Call<AddEmployee>, t: Throwable) {
-                TODO("Not yet implemented")
+                updateEmployeeLiveData.postValue(null)
             }
 
         })
     }
-
 }

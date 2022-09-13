@@ -1,4 +1,7 @@
 package com.naph.mvvmjetpack.view.bottom_nav
 
-class Screen {
+sealed class Screen(
+    val route: String
+) {
+    object EmployeeDetailScreen: Screen("employee_detail_screen")
 }

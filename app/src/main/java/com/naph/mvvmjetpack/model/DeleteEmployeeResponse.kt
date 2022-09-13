@@ -1,6 +1,6 @@
 package com.naph.mvvmjetpack.model
 
-data class EmployeeDetail(
-    val `data`: DataDetail,
+data class DeleteEmployeeResponse(
+    val message: String,
     val status: String
 )
